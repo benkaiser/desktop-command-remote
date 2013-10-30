@@ -1,0 +1,11 @@
+body, html{
+  background-color: #4bf;
+}
+#main-content{
+  background-color: #fff;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  padding-bottom: 40px;
+  box-shadow: 0 0 50px #000;
+  position: relative;
+}

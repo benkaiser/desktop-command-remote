@@ -1,0 +1,24 @@
+{
+  "name": "Desktop-Command-Remote",
+  "version": "0.1.0",
+  "description": "Allows you to execute desktop terminal commands from your phone or other devices through a web interface.",
+  "keywords": [
+    "Remote"
+  ],
+  "author": {
+    "name": "Ben Kaiser",
+    "email": "benjaminjkaiser@gmail.com",
+    "url":  "http://xpressen.com"
+  },
+  "homepage": "http://www.expressen.com",
+  "engines": {
+    "node": ">= 0.6.0",
+    "npm": ">= 1.0.0"
+  },
+  "dependencies": {
+    "express.io":       "*",
+    "swig":             "*"
+  },
+  "private": true,
+  "main": "server.js"
+}

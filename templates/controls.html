@@ -1,0 +1,38 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Google Music Controller{% endblock %}
+
+{% block content %}
+<div class="container" id="main-content">
+  <div class="text-center">
+    <h1>Desktop Command Remote</h1>
+      <div id="command_block"></div>
+  </div>
+</div>
+{% raw %}
+<script type="text/mustache" id="command_template">
+  <h3>Available Commands</h3>
+  {{#data}}
+    <div class='btn btn-block btn-primary commandbtn {{options.buttonClass}}' data-id='{{id}}'>{{title}}</div>
+  {{/data}}  
+</script>
+{% endraw %}
+{% endblock %}
+{% block scripts %}
+<!-- Needed for backbone -->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min.js"></script>
+<!-- Backbone is for better MVC support -->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/backbone.marionette/1.1.0-bundled/backbone.marionette.min.js"></script>
+<!-- Mustache is a nice templating library -->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
+<!-- Socket used for communication with the server -->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+<!-- Messenger Plugin -->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/messenger/1.3.3/js/messenger.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/messenger/1.3.3/css/messenger.css">
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/messenger/1.3.3/css/messenger-theme-air.css">
+
+<!-- All the logic is in this script-->
+<script type="text/javascript" src="/static/js/controls.js"></script>
+{% endblock %}
