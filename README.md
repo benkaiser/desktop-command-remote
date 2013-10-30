@@ -1,7 +1,7 @@
 Desktop Command Remote
 ======================
 
-![Image](./blob/master/screenshots/android_screenshot.png?raw=true)
+![Image](./screenshots/android_screenshot.png?raw=true)
 
 This simple application allows you to run a web server that lists certain terminal commands you would like to run on your desktop.
 
