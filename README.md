@@ -1,8 +1,6 @@
 Desktop Command Remote
 ======================
 
-![Image](./screenshots/android_screenshot.png?raw=true)
-
 This simple application allows you to run a web server that lists certain terminal commands you would like to run on your desktop.
 
 I use this application to control my volume and sleep my monitors (from my couch / bed). You can use it to play music, open applications, the possibilities are only limited by your command-line-fu and imagination!
@@ -10,9 +8,13 @@ I use this application to control my volume and sleep my monitors (from my couch
 Instructions
 ------------
 
+* Clone this repo with `git clone git@github.com:benkaiser/desktop-command-remote.git`
+* Move into the cloned directory `cd desktop-command-remote`
 * Edit the file `configure.js` with the commands you want.
 * Run the server with: `node server.js`
+![Image](./screenshots/server_running.png?raw=true)
 * Visit the url given to you somewhere in the console output.
+![Image](./screenshots/android_screenshot_thumbnail.png?raw=true)
 
 Documentation for editing the configure.js file
 -----------------------------------------------
