@@ -16,7 +16,7 @@ module.exports = function(){
   addCommand("button", "Screensaver", "xscreensaver-command -activate");
 
   // suspend system
-  addCommand("button", "Suspend System", "xset dpms force off", {
+  addCommand("button", "Suspend System", "systemctl suspend", {
       buttonClass: "btn-danger" 
     });
 
