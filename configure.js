@@ -18,9 +18,10 @@ module.exports = function(){
   // start screensaver
   addCommand("button", "Screensaver", "xscreensaver-command -activate");
 
-  // suspend system
+  // suspend system (note the confirm option, to make sure the user does not accidentally press the button)
   addCommand("button", "Suspend System", "systemctl suspend", {
-      buttonClass: "btn-danger" 
+      buttonClass: "btn-danger",
+      confirm: true
     });
 
   // ***** AND BEFORE HERE ***** ////

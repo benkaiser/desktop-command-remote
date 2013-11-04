@@ -36,7 +36,8 @@ function sendRequest(data, human_readable){
   Messenger().post({
     message: human_readable,
     type: 'success',
-    id: "force_only_one"
+    id: "force_only_one",
+    hideAfter: 2,
   });
 }
 
@@ -68,7 +69,13 @@ var CommandView = Backbone.View.extend({
     // TODO: Get ID
     id = idFromEvent(ev);
     command = commands[id];
-    sendRequest(command, command.title);
+    if(command.options !== undefined 
+      && command.options.confirm !== undefined 
+      && command.options.confirm == true){
+      confirmDialogue(command);    
+    } else {
+      sendRequest(command, command.title);
+    }
   }
 });
 function updateValueSlider(ev){
@@ -78,7 +85,21 @@ function updateValueSlider(ev){
   command.value = val;
   sendRequest(command, command.title + ":" + val);
 }
-
+function confirmDialogue(command){
+  // show confirm dialogue for action
+  bootbox.confirm("Are you sure you want to " + command.title + "?", function(result) {
+    if(result){
+      sendRequest(command, command.title);
+    } else {
+      // show cancellation message
+      Messenger().post({
+        message: "Event cancelled.",
+        type: 'error',
+        id: "force_only_one"
+      });
+    }
+  }); 
+}
 
 // finally start the app (call all the initializers)
 RemoteControllerApp.start();

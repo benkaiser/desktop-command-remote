@@ -22,7 +22,10 @@
   {% block content %}
   {% endblock %}
   <script type="text/javascript">
-    head.js("/static/js/libs/jquery.min.js");
+    head.js(
+      "/static/js/libs/jquery.min.js",
+      "/static/js/libs/bootstrap.min.js"
+      );
   </script>
   {% block scripts %}
   {% endblock %}
