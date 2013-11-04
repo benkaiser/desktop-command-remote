@@ -25,24 +25,23 @@
 {% endraw %}
 {% endblock %}
 {% block scripts %}
-<!-- Needed for backbone -->
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min.js"></script>
-<!-- Backbone is for better MVC support -->
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/backbone.marionette/1.1.0-bundled/backbone.marionette.min.js"></script>
-<!-- Mustache is a nice templating library -->
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
-<!-- Socket used for communication with the server -->
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
-<!-- Messenger Plugin -->
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/messenger/1.3.3/js/messenger.min.js"></script>
-<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/messenger/1.3.3/css/messenger.css">
-<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/messenger/1.3.3/css/messenger-theme-air.css">
-<!-- Slider plugin -->
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.js"></script>
-<script type="text/javascript" src="/static/js/libs/bootstrap-slider.js"></script>
-<link rel="stylesheet" href="/static/css/lib/slider.css">
+<script type="text/javascript">
+  head.js(
+    "/static/js/libs/underscore-min.js", // Needed for backbone
+    "/static/js/libs/backbone-min.js", // Backbone is for better MVC support
+    "/static/js/libs/backbone.marionette.min.js",
+    "/static/js/libs/mustache.min.js", // Mustache is a nice templating library
+    "/static/js/libs/socket.io.min.js", // Socket used for communication with the server
+    "/static/js/libs/messenger.min.js", // Messenger Plugin
+    "/static/js/libs/modernizr.min.js", // needed for slider
+    "/static/js/libs/bootstrap-slider.js", // Slider plugin
+    "/static/js/controls.js" // main application
+    );
+  head.load(
+    "/static/css/lib/messenger.css",
+    "/static/css/lib/messenger-theme-air.css",
+    "/static/css/lib/slider.css"
+    );
+</script>
 
-<!-- All the logic is in this script-->
-<script type="text/javascript" src="/static/js/controls.js"></script>
 {% endblock %}
