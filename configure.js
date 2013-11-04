@@ -11,7 +11,7 @@ module.exports = function(){
 
   // send display to sleep
   addCommand("button", "Screen Sleep", "xset dpms force off");
-
+  addCommand("button", "Screen Wake", "xset dpms force on;xset s reset;");
   // start screensaver
   addCommand("button", "Screensaver", "xscreensaver-command -activate");
 
