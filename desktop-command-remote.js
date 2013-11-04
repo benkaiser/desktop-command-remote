@@ -1,6 +1,8 @@
 var express  = require('express.io');
 var swig  = require('swig');
 var fs = require('fs');
+var util = require('util');
+
 // runs a system command
 var exec = require('child_process').exec;
 function puts(error, stdout, stderr) { console.log("Command Output:" + stdout.trim()) }
@@ -43,8 +45,15 @@ exports.Server = function(app, ext){
     self.options = require(configFile)();
   }
   self.runCommand = function(data){
-    if(data.type == 'button'){
-      exec(data.command, puts);
+    switch(data.type){
+      case 'button':
+        exec(data.command, puts);
+        break;
+      case 'slider':
+        // compile value of slider into command
+        command = util.format(data.command, data.value);
+        exec(command, puts);
+        break;    
     }
   }
 }

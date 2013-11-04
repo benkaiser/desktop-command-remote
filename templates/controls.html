@@ -13,7 +13,13 @@
 <script type="text/mustache" id="command_template">
   <h3>Available Commands</h3>
   {{#data}}
-    <div class='btn btn-block btn-primary commandbtn {{options.buttonClass}}' data-id='{{id}}'>{{title}}</div>
+    {{#button}}
+      <div class='btn btn-block btn-primary commandbtn {{options.buttonClass}}' data-id='{{id}}'>{{title}}</div>
+    {{/button}}
+    {{#slider}}
+      <p>{{title}}</p>
+      <input type="text" class="commandSlider" value="" data-slider-min="{{options.min}}" data-slider-max="{{options.max}}" data-slider-step="{{options.step}}" data-slider-value="{{options.value}}" data-id='{{id}}'>
+    {{/slider}}
   {{/data}}  
 </script>
 {% endraw %}
@@ -32,6 +38,10 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/messenger/1.3.3/js/messenger.min.js"></script>
 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/messenger/1.3.3/css/messenger.css">
 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/messenger/1.3.3/css/messenger-theme-air.css">
+<!-- Slider plugin -->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.js"></script>
+<script type="text/javascript" src="/static/js/libs/bootstrap-slider.js"></script>
+<link rel="stylesheet" href="/static/css/lib/slider.css">
 
 <!-- All the logic is in this script-->
 <script type="text/javascript" src="/static/js/controls.js"></script>

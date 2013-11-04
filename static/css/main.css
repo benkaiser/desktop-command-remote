@@ -9,3 +9,12 @@ body, html{
   box-shadow: 0 0 50px #000;
   position: relative;
 }
+.slider.slider-horizontal{
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+.slider-slection{
+  background-color: #2fa4e7;
+  background-image: none;
+}
