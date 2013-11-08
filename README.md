@@ -10,6 +10,7 @@ Instructions
 
 * Clone this repo with `git clone git@github.com:benkaiser/desktop-command-remote.git`
 * Move into the cloned directory `cd desktop-command-remote`
+* Run `npm install` to install the required packages.
 * Edit the file `configure.js` with the commands you want.
 * Run the server with: `node server.js`
 ![Image](./screenshots/server_running.png?raw=true)
