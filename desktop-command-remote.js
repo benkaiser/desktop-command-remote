@@ -5,7 +5,7 @@ var util = require('util');
 
 // runs a system command
 var exec = require('child_process').exec;
-function puts(error, stdout, stderr) { console.log("Command Output:" + stdout.trim()) }
+function puts(error, stdout, stderr) { console.log(error); console.log(stderr);console.log("Command Output:" + stdout.trim()) }
 
 exports.Server = function(app, ext){
   var self = this;
@@ -52,6 +52,7 @@ exports.Server = function(app, ext){
       case 'slider':
         // compile value of slider into command
         command = util.format(data.command, data.value);
+        console.log(command);
         exec(command, puts);
         break;    
     }
