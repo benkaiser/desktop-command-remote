@@ -19,6 +19,10 @@ socket.on('init_controls', function(data){
   RemoteControllerApp.commandRegion.show(commandView);
 });
 
+socket.on('updateSlider', function(data){
+  $(".commandSlider").slider('setValue', data.value)
+});
+
 function filterCommands(data){
   for (var i = data.length - 1; i >= 0; i--) {
     data[i][data[i].type] = true;
