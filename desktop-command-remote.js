@@ -5,7 +5,6 @@ var util = require('util');
 
 // runs a system command
 var exec = require('child_process').exec;
-function puts(error, stdout, stderr) { console.log("Command Output:" + stdout.trim()) }
 
 exports.Server = function(app, ext){
   var self = this;
@@ -47,13 +46,20 @@ exports.Server = function(app, ext){
   self.runCommand = function(data){
     switch(data.type){
       case 'button':
-        exec(data.command, puts);
+        exec(data.command, self.puts);
         break;
       case 'slider':
         // compile value of slider into command
         command = util.format(data.command, data.value);
-        exec(command, puts);
+        exec(command, self.puts);
         break;    
     }
+  }
+  self.puts = function(error, stdout, stderr){
+    stdout = stdout.trim();
+    // output the message to the console
+    console.log("Command Output:" + stdout);
+    // send the output back to the client, currently only passes stdout.
+    self.app.io.sockets.emit('log', {stdout: stdout});
   }
 }
