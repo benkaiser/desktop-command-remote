@@ -15,7 +15,8 @@ var commandLine = {
 		volumeUp2: "amixer sset Master 2%+",
 		volumeDown2: "amixer sset Master 2%-",
 		volumeUp10: "amixer sset Master 10%+",
-		volumeDown10: "amixer sset Master 10%-"
+		volumeDown10: "amixer sset Master 10%-",
+		getVolume: "amixer get Master"
 	},
 	os:{
 		moveVol : 'osascript -e "set volume output volume %s --100%"',
@@ -25,6 +26,7 @@ var commandLine = {
 		volumeDown2: 'osascript -e "set volume output volume (output volume of (get volume settings) - 2) --100%"',
 		volumeUp10: 'osascript -e "set volume output volume (output volume of (get volume settings) + 10) --100%"',
 		volumeDown10: 'osascript -e "set volume output volume (output volume of (get volume settings) - 10) --100%"',
+		getVolume: 'osascript -e  "output volume of (get volume settings)"'
 	}
 }
 
@@ -34,7 +36,7 @@ var checker = function(sys){
 	}
 }
 checker = checker(sys);
-module.exports = function(){
+module.exports.init = function(){
 	// ***** ONLY EDIT AFTER HERE **** //////
 
 	if(checker("moveVol"))
@@ -68,7 +70,7 @@ module.exports = function(){
 		addCommand("button", "Volume Down 2%", checker("volumeDown2"));
 	if(checker("volumeUp10"))
 		addCommand("button", "Volume Up 10%", checker("volumeUp10"));
-	if(checker("volumeUp10"))
+	if(checker("volumeDown10"))
 		addCommand("button", "Volume Down 10%", checker("volumeDown10"));
 
 	// ***** AND BEFORE HERE ***** ////
@@ -76,6 +78,7 @@ module.exports = function(){
 	return commands;
 }
 
+module.exports.getVolume = checker("getVolume");
 
 function addCommand(type, title, value, options){
 	commands.push({
