@@ -7,6 +7,7 @@
   <div class="text-center">
     <h1>Desktop Command Remote</h1>
       <div id="command_block"></div>
+      <div id="log_block"></div>
   </div>
 </div>
 {% raw %}
@@ -21,6 +22,15 @@
       <input type="text" class="commandSlider" value="" data-slider-min="{{options.min}}" data-slider-max="{{options.max}}" data-slider-step="{{options.step}}" data-slider-value="{{options.value}}" data-id='{{id}}'>
     {{/slider}}
   {{/data}}  
+</script>
+<script type="text/mustache" id="log_template">
+  {{^vis}}
+    <a class='btn btn-default btn-block toggle_vis' href="#">Show Output</a>
+  {{/vis}}
+  {{#vis}}
+    <a class='btn btn-default btn-block toggle_vis' href="#">Hide Output</a>
+    <pre>{{#logs}}{{.}}{{/logs}}</pre>
+  {{/vis}}
 </script>
 {% endraw %}
 {% endblock %}
