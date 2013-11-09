@@ -5,12 +5,16 @@ Messenger.options = {
 }
 // Command array
 var commands = [];
+// Log array
+var logs = [];
 // soccet connection and events
 var socket = io.connect('http://'+window.location.hostname+':3000');
 socket.on('connect', function(){
   console.log("requesting commands");
   socket.emit('init_controls');
 });
+logView = null;
+commandView = null;
 socket.on('init_controls', function(data){
   // set the commands
   commands = filterCommands(data);
@@ -18,9 +22,22 @@ socket.on('init_controls', function(data){
   commandView = new CommandView();
   RemoteControllerApp.commandRegion.show(commandView);
 });
-
 socket.on('updateSlider', function(data){
   $(".commandSlider").slider('setValue', data.value)
+});
+socket.on('log', function(data){
+  // add to the logs
+  output = data.stdout;
+  logs.push(output);
+  if(logs.length > 5){
+    logs.shift();
+  }
+  if(logs.length == 1){
+    // first time
+    logView = new LogView();
+    RemoteControllerApp.logRegion.show(logView);
+  }
+  logView.render();
 });
 
 function filterCommands(data){
@@ -50,7 +67,8 @@ function sendRequest(data, human_readable){
 RemoteControllerApp = new Backbone.Marionette.Application();
 
 RemoteControllerApp.addRegions({
-  commandRegion: "#command_block"
+  commandRegion: "#command_block",
+  logRegion: "#log_block"
 });
 
 RemoteControllerApp.addInitializer(function(options){
@@ -82,6 +100,22 @@ var CommandView = Backbone.View.extend({
     }
   }
 });
+
+var LogView = Backbone.View.extend({
+  template: "#log_template",
+  visibility: false,
+  render: function(){
+    this.$el.html(render(this.template, {logs: logs, vis: this.visibility}));
+  },
+  events: {
+    "click .toggle_vis": "toggle_vis"
+  },
+  toggle_vis: function(){
+    this.visibility = !this.visibility;
+    this.render();
+  }
+})
+
 function updateValueSlider(ev){
   id = idFromEvent(ev);
   val = $("[data-id='"+id+"']").val();

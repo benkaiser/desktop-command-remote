@@ -6,11 +6,6 @@ var sockets = [];
 
 // runs a system command
 var exec = require('child_process').exec;
-function puts(error, stdout, stderr) { 
-  // console.log(error); 
-  // console.log(stderr);
-  // console.log("Command Output:" + stdout.trim());
-}
 
 exports.Server = function(app, ext){
   var self = this;
@@ -32,6 +27,7 @@ exports.Server = function(app, ext){
     });
     // api and socket functions
     self.app.io.sockets.on('connection', function(socket){
+      // add it to sockets collection
       sockets.push(socket);
       // recieve from controller
       socket.on('control', function(data){
@@ -39,6 +35,11 @@ exports.Server = function(app, ext){
       });
       socket.on('init_controls', function(data){
         socket.emit("init_controls", self.options);
+      });
+      socket.on('disconnect', function(){
+        var index = sockets.indexOf(socket);
+        // remove it from sockets collection
+        if(index > -1) sockets.splice(index, 1);
       });
     });
     // test function
@@ -48,15 +49,20 @@ exports.Server = function(app, ext){
     });
   }
   self.config = function(configFile){
-    var config = require(configFile);
-    self.options = config.init();
-    self.getVolume = config.getVolume;
+    var commands = require(configFile)();
+    self.options = commands;
+    // if get volume provided, set it into self for updating usage
+    commands.forEach(function(command){
+      if(command.title == "Get Volume")
+        self.getVolume = command.command;
+    })
   }
   self.runCommand = function(data){
-    var callback = puts;
+    var callback = self.puts;
+    // modified callback if puts provided
     if(data.title.indexOf("Volume") >= 0 && self.getVolume){
       callback = function(error, stdout, stderr){
-        puts(error, stdout, stderr);
+        self.puts(error, stdout, stderr);
         exec(self.getVolume, function(error, stdout, stderr) {
           sockets.forEach(function(socket){
             socket.emit("updateSlider", {value: stdout.trim()});
@@ -64,7 +70,6 @@ exports.Server = function(app, ext){
         });
       }
     }
-
     switch(data.type){
       case 'button':
         exec(data.command, callback);
@@ -75,5 +80,12 @@ exports.Server = function(app, ext){
         exec(command, callback);
         break;    
     }
+  }
+  self.puts = function(error, stdout, stderr){
+    stdout = stdout.trim();
+    // output the message to the console
+    console.log("Command Output:" + stdout);
+    // send the output back to the client, currently only passes stdout.
+    self.app.io.sockets.emit('log', {stdout: stdout});
   }
 }

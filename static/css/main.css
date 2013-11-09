@@ -9,6 +9,9 @@ body, html{
   box-shadow: 0 0 50px #000;
   position: relative;
 }
+.toggle_vis{
+  margin-top: 10px;
+}
 .slider.slider-horizontal{
   margin-left: 5px;
   margin-right: 5px;
