@@ -8,11 +8,11 @@ I use this application to control my volume and sleep my monitors (from my couch
 Instructions
 ------------
 
-* Clone this repo with `git clone git@github.com:benkaiser/desktop-command-remote.git`
-* Move into the cloned directory `cd desktop-command-remote`
+* Clone this repo with `git clone git@github.com:benkaiser/desktop-command-remote.git`.
+* Move into the cloned directory `cd desktop-command-remote`.
 * Run `npm install` to install the required packages.
 * Edit the file `configure.js` with the commands you want.
-* Run the server with: `node server.js`
+* Run the server with: `node server.js` (this may need to be `sudo node server.js` if you need to run priveledged commands, such as those in the mac sample config).
 ![Image](./screenshots/server_running.png?raw=true)
 * Visit the url given to you somewhere in the console output.
 ![Image](./screenshots/android_screenshot_thumbnail.png?raw=true)
