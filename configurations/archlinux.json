@@ -1,0 +1,37 @@
+[
+  {
+    "type":"slider",
+    "title":"Volume",
+    "command":"amixer sset Master %s%",
+    "options":{
+      "min":0,
+      "max":100,
+      "value":0,
+      "step":1
+    }
+  },
+  {
+    "type":"button",
+    "title":"Screen Sleep",
+    "command":"xset dpms force off"
+  },
+  {
+    "type":"button",
+    "title":"Screen Wake",
+    "command":"xset dpms force on;xset s reset;"
+  },
+  {
+    "type":"button",
+    "title":"Screensaver",
+    "command":"xscreensaver-command -activate"
+  },
+  {
+    "type":"button",
+    "title":"Suspend System",
+    "command":"systemctl suspend",
+    "options":{
+      "buttonClass":"btn-danger",
+      "confirm":true
+    }
+  }
+]

@@ -1,40 +1,38 @@
 commands = [];
 cntr = 0;
 module.exports = function(){
-  // ***** ONLY EDIT AFTER HERE **** //////
+  // ***** PUT IN CUSTOM EDITS HERE **** //////
 
-  // volume control with amixer, using slider
-  // requires all options. %s in command is where the number goes
-  addCommand("slider", "Volume", "amixer sset Master %s%", {
-    min: 0,
-    max: 100,
-    value: 0,
-    step: 1
-  });
+  // change this to the name of another name in the configurations folder, or remove for complete custom config
+  loadSampleConfigFile("archlinux");
 
-  // send display to sleep
-  addCommand("button", "Screen Sleep", "xset dpms force off");
-  addCommand("button", "Screen Wake", "xset dpms force on;xset s reset;");
-  // start screensaver
-  addCommand("button", "Screensaver", "xscreensaver-command -activate");
-
-  // suspend system (note the confirm option, to make sure the user does not accidentally press the button)
-  addCommand("button", "Suspend System", "systemctl suspend", {
-      buttonClass: "btn-danger",
-      confirm: true
-    });
+  // add custom config here
 
   // ***** AND BEFORE HERE ***** ////
-
+  console.log(JSON.stringify(commands));
   return commands;
 }
 
-// volume with buttons
-// addCommand("button", "Volume Up 2%", "amixer sset Master 2%+");
-// addCommand("button", "Volume Down 2%", "amixer sset Master 2%-");
-// addCommand("button", "Volume Up 10%", "amixer sset Master 10%+");
-// addCommand("button", "Volume Down 10%", "amixer sset Master 10%-");
+// **** EXAMPLE USAGE TO ADD YOUR OWN COMMANDS **** //
 
+// example of a slider
+// addCommand("slider", "Volume", "amixer sset Master %s%", {
+//   min: 0,
+//   max: 100,
+//   value: 0,
+//   step: 1
+// });
+
+// example of a button
+// addCommand("button", "Screen Sleep", "xset dpms force off");
+
+// example of a button with different styling and confirmation dialogue
+// addCommand("button", "Suspend System", "systemctl suspend", {
+//     buttonClass: "btn-danger",
+//     confirm: true
+//  });
+
+// add the needed input, examples above.
 function addCommand(type, title, value, options){
   commands.push({
     id: cntr++,
@@ -43,4 +41,14 @@ function addCommand(type, title, value, options){
     command: value,
     options: options
   });
+}
+
+// function to load pre-built configurations for certain environments
+function loadSampleConfigFile(name){
+  file = __dirname + "/configurations/" + name + ".json";
+  data = require(file);
+  for (var i = 0; i < data.length; i++) {
+    data[i]["id"] = cntr++;
+    commands.push(data[i]);
+  }
 }

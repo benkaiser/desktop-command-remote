@@ -1,0 +1,27 @@
+[
+  {
+    "type":"slider",
+    "title":"Volume",
+    "command":"osascript -e 'set volume output volume %s --100%'",
+    "options":{
+      "min":0,
+      "max":100,
+      "value":0,
+      "step":1
+    }
+  },
+  {
+    "type":"button",
+    "title":"Screensaver",
+    "command":"open -a /System/Library/Frameworks/ScreenSaver.framework//Versions/A/Resources/ScreenSaverEngine.app"
+  },
+  {
+    "type":"button",
+    "title":"Suspend System",
+    "command":"pmset sleepnow",
+    "options":{
+      "buttonClass":"btn-danger",
+      "confirm":true
+    }
+  }
+]
