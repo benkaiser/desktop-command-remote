@@ -25,12 +25,16 @@ socket.on('init_controls', function(data){
 socket.on('log', function(data){
   // add to the logs
   output = data.stdout;
-  logs.push(output);
-  if(logs.length > 5){
-    logs.shift();
+  // only add if not blank
+  if(data.stdout.length > 0){
+    logs.push(output);
+    // limit the logs to 5
+    if(logs.length > 5){
+      logs.shift();
+    }
   }
+  // first time log, show the output
   if(logs.length == 1){
-    // first time
     logView = new LogView();
     RemoteControllerApp.logRegion.show(logView);
   }
